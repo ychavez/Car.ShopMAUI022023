@@ -3,10 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Car.ShopMAUI.Views.AddCar"
              Title="AddCar">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+
+        <VerticalStackLayout>
+
+            <Frame CornerRadius="200" WidthRequest="200" HeightRequest="200">
+                <Image x:Name="imgCar" Source="dotnet_bot"></Image>
+            </Frame>
+
+            <Entry x:Name="entryModelo" Placeholder="Modelo"/>
+            <Entry x:Name="entryMarca" Placeholder="Marca"/>
+            <Entry x:Name="entryAnio" Placeholder="Año" Keyboard="Numeric"/>
+            <Entry x:Name="entryDescripcion" Placeholder="Marca"/>
+            <Entry x:Name="entryPrecio" Placeholder="Marca" Keyboard="Numeric"/>
+            <Button x:Name="btnAceptar" Text="Aceptar" Clicked="btnAceptar_Clicked"/>
+            <Button x:Name="btnPhoto" Text="Tomar foto" />
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

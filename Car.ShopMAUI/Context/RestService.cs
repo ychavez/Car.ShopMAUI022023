@@ -1,4 +1,4 @@
-﻿
+﻿using System.Text;
 using System.Text.Json;
 
 namespace Car.ShopMAUI.Context
@@ -10,14 +10,14 @@ namespace Car.ShopMAUI.Context
 
         public RestService()
         {
-            _urlBase = new Uri("https://dwshopwebclient20230216212752.azurewebsites.net/api");
+            _urlBase = new Uri("https://dwshopwebclient20230216212752.azurewebsites.net/api/");
             _httpClient = new();
             _httpClient.BaseAddress = _urlBase;
         }
 
         public async Task<List<Models.Car>> GetCars()
         {
-            var response = await _httpClient.GetAsync("/CarsForSalesApi");
+            var response = await _httpClient.GetAsync("CarsForSalesApi");
            
             if (response.IsSuccessStatusCode)
             {
@@ -30,6 +30,20 @@ namespace Car.ShopMAUI.Context
 
             throw new Exception("Error al tratar de obtener la informacion");
         
+        }
+
+        public async Task SetCar(Models.Car car) 
+        {
+
+            var json = JsonSerializer.Serialize(car);
+
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync("CarsForSalesApi", data);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Error al tratar de enviar la informacion");
+
         }
 
     }
