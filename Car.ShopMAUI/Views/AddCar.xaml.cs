@@ -28,3 +28,11 @@ public partial class AddCar : ContentPage
         await Navigation.PopAsync();
     }
 }
+
+/*
+ * 1 agregar el tabbed page como pagina de navegacion
+ * 2 agregar un boton que nos permita hacer push de una nueva pagina de contenido
+ * 3 esta pagina de contenido tendra que tener los controles necesarios para poder dar de alta
+ *    una nueva ciudad contemplando una foto (URL) y latitud y longitud
+ * 4 esta pagina tambien tendra que tener un boton para capturar
+ */
