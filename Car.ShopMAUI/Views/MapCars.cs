@@ -1,16 +1,26 @@
+using Microsoft.Maui.Maps;
+
 namespace Car.ShopMAUI.Views;
 
 public class MapCars : ContentPage
 {
+	Microsoft.Maui.Controls.Maps.Map map;
 	public MapCars()
 	{
-		Title = "MapCars";
-		Content = new VerticalStackLayout
-		{
-			Children = {
-				new Label { HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Center, Text = "Welcome to .NET MAUI!"
-				}
-			}
-		};
+        Title = "MapCars";
+		
+		
 	}
+
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        map = new(MapSpan.FromCenterAndRadius(new Location(47.673988, -122.121513),
+            Distance.FromKilometers(5)));
+        map.IsShowingUser = false;
+       Content = map;
+    }
 }
+ 
