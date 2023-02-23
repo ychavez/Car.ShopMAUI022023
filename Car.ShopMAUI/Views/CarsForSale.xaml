@@ -28,7 +28,7 @@
                                     <Label Text="{Binding Description}" 
                                   HorizontalOptions="Center" VerticalOptions="Center"/>
                                 </VerticalStackLayout>
-                                <Button Text="Favorito" Grid.Column="2" 
+                                <Button Text="Favorito" Grid.Column="2" Clicked="Button_OnClicked"
                               VerticalOptions="Center"/>
                             </Grid>
 

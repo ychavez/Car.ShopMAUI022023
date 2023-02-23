@@ -18,9 +18,6 @@
             <Entry x:Name="entryPrecio" Placeholder="Marca" Keyboard="Numeric"/>
             <Button x:Name="btnAceptar" Text="Aceptar" Clicked="btnAceptar_Clicked"/>
             <Button x:Name="btnPhoto" Text="Tomar foto" />
-
-
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
