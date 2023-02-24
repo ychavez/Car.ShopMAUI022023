@@ -32,10 +32,14 @@ public partial class AddCar : ContentPage
         await Navigation.PopAsync();
     }
 
-    private void btnPhoto_Clicked(object sender, EventArgs e)
+    private async void btnPhoto_Clicked(object sender, EventArgs e)
     {
-        imgCar.Source = ImageSource.FromStream(async x =>
-           await (await MediaPicker.Default.CapturePhotoAsync()).OpenReadAsync());
+
+        string action = await DisplayActionSheet("Cual deberia de tomar?", "Cancel", "Ok", "Galeria", "Camara");
+
+        var photo = action == "Galeria" ? await MediaPicker.Default.PickPhotoAsync() : await MediaPicker.Default.CapturePhotoAsync();
+
+        imgCar.Source = ImageSource.FromStream(async x =>  await photo.OpenReadAsync());
 
     }
 }
