@@ -31,5 +31,12 @@ public partial class AddCar : ContentPage
         await new RestService().SetCar(car);
         await Navigation.PopAsync();
     }
+
+    private void btnPhoto_Clicked(object sender, EventArgs e)
+    {
+        imgCar.Source = ImageSource.FromStream(async x =>
+           await (await MediaPicker.Default.CapturePhotoAsync()).OpenReadAsync());
+
+    }
 }
 
