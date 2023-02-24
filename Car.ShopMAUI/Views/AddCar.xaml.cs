@@ -15,13 +15,17 @@ public partial class AddCar : ContentPage
 
     private async void btnAceptar_Clicked(object sender, EventArgs e)
     {
+        var location = await Geolocation.Default.GetLocationAsync();
+
         Models.Car car = new()
         {
             Brand = entryMarca.Text,
             Description = entryDescripcion.Text,
             Model = entryModelo.Text,
             Year = int.Parse(entryAnio.Text),
-            Price = decimal.Parse(entryPrecio.Text)
+            Price = decimal.Parse(entryPrecio.Text),
+            Lat = location.Latitude,
+            Lon = location.Longitude
         };
 
         await new RestService().SetCar(car);
@@ -29,10 +33,3 @@ public partial class AddCar : ContentPage
     }
 }
 
-/*
- * 1 agregar el tabbed page como pagina de navegacion
- * 2 agregar un boton que nos permita hacer push de una nueva pagina de contenido
- * 3 esta pagina de contenido tendra que tener los controles necesarios para poder dar de alta
- *    una nueva ciudad contemplando una foto (URL) y latitud y longitud
- * 4 esta pagina tambien tendra que tener un boton para capturar
- */

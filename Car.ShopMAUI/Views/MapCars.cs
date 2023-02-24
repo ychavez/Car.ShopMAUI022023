@@ -1,26 +1,44 @@
+using Car.ShopMAUI.Context;
 using Microsoft.Maui.Maps;
 
 namespace Car.ShopMAUI.Views;
 
 public class MapCars : ContentPage
 {
-	Microsoft.Maui.Controls.Maps.Map map;
-	public MapCars()
-	{
+    Microsoft.Maui.Controls.Maps.Map map;
+    public MapCars()
+    {
         Title = "MapCars";
-		
-		
-	}
 
 
-    protected override void OnAppearing()
+    }
+
+
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-
-        map = new(MapSpan.FromCenterAndRadius(new Location(47.673988, -122.121513),
+        var location = await Geolocation.Default.GetLocationAsync();
+        map = new(MapSpan.FromCenterAndRadius(location,
             Distance.FromKilometers(5)));
-        map.IsShowingUser = false;
-       Content = map;
+        map.IsShowingUser = true;
+
+        var carsForSale = await new RestService().GetCars();
+
+        foreach (var car in carsForSale)
+        {
+            if (car.Lat is null || car.Lon is null)
+                continue;
+
+            map.Pins.Add(
+                new()
+                {
+                    Label = car.Description,
+                    Location = new Location(car.Lat.Value, car.Lon.Value)
+                });
+
+        }
+
+
+        Content = map;
     }
 }
- 
