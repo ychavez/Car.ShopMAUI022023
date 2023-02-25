@@ -1,6 +1,8 @@
 
 
 using Car.ShopMAUI.Context;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 
 namespace Car.ShopMAUI.Views;
 
@@ -15,7 +17,7 @@ public partial class AddCar : ContentPage
 
     private async void btnAceptar_Clicked(object sender, EventArgs e)
     {
-        var location = await Geolocation.Default.GetLocationAsync();
+       // var location = await Geolocation.Default.GetLocationAsync();
 
         Models.Car car = new()
         {
@@ -23,9 +25,10 @@ public partial class AddCar : ContentPage
             Description = entryDescripcion.Text,
             Model = entryModelo.Text,
             Year = int.Parse(entryAnio.Text),
+            PhotoUrl = entryUrlPhoto.Text,
             Price = decimal.Parse(entryPrecio.Text),
-            Lat = location.Latitude,
-            Lon = location.Longitude
+            //Lat = location.Latitude,
+            //Lon = location.Longitude
         };
 
         await new RestService().SetCar(car);
@@ -41,6 +44,23 @@ public partial class AddCar : ContentPage
 
         imgCar.Source = ImageSource.FromStream(async x =>  await photo.OpenReadAsync());
 
+
+        var account = new Account("dm0wb7rsq", "833115171146254", "axg8X4k3SFhntwaceKoOGtFyz40");
+
+        var cloudinary = new Cloudinary(account);
+
+
+        var uploadsParams = new ImageUploadParams
+        {
+
+            File = new FileDescription(Guid.NewGuid().ToString(), await photo.OpenReadAsync())
+        };
+
+        var uploadResults = await cloudinary.UploadAsync(uploadsParams);
+
+        var urlPhoto = uploadResults.Url;
+
+        entryUrlPhoto.Text = urlPhoto.AbsoluteUri;
     }
 }
 

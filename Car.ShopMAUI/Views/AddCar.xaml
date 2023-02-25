@@ -8,14 +8,15 @@
         <VerticalStackLayout>
 
             <Frame CornerRadius="200" WidthRequest="200" HeightRequest="200">
-                <Image x:Name="imgCar" Source="dotnet_bot"></Image>
+                <Image x:Name="imgCar" Source="https://res.cloudinary.com/dm0wb7rsq/image/upload/v1677282401/bxiwpkqjqonywmvtnngp.jpg"></Image>
             </Frame>
 
             <Entry x:Name="entryModelo" Placeholder="Modelo"/>
             <Entry x:Name="entryMarca" Placeholder="Marca"/>
             <Entry x:Name="entryAnio" Placeholder="Año" Keyboard="Numeric"/>
-            <Entry x:Name="entryDescripcion" Placeholder="Marca"/>
-            <Entry x:Name="entryPrecio" Placeholder="Marca" Keyboard="Numeric"/>
+            <Entry x:Name="entryDescripcion" Placeholder="Descipcion"/>
+            <Entry x:Name="entryPrecio" Placeholder="Precio" Keyboard="Numeric"/>
+            <Entry x:Name="entryUrlPhoto" Placeholder="UrlFoto" Keyboard="Url"/>
             <Button x:Name="btnAceptar" Text="Aceptar" Clicked="btnAceptar_Clicked"/>
             <Button x:Name="btnPhoto" Text="Tomar foto" Clicked="btnPhoto_Clicked" />
         </VerticalStackLayout>
