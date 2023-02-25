@@ -3,6 +3,9 @@
 using Car.ShopMAUI.Context;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using System.Drawing;
+using System.Drawing.Imaging;
+
 
 namespace Car.ShopMAUI.Views;
 
@@ -40,23 +43,31 @@ public partial class AddCar : ContentPage
 
         string action = await DisplayActionSheet("Cual deberia de tomar?", "Cancel", "Ok", "Galeria", "Camara");
 
+     
+
         var photo = action == "Galeria" ? await MediaPicker.Default.PickPhotoAsync() : await MediaPicker.Default.CapturePhotoAsync();
 
         imgCar.Source = ImageSource.FromStream(async x =>  await photo.OpenReadAsync());
 
+        var imgName = Guid.NewGuid().ToString();
 
         var account = new Account("dm0wb7rsq", "833115171146254", "axg8X4k3SFhntwaceKoOGtFyz40");
 
         var cloudinary = new Cloudinary(account);
 
 
+        var photoStream = await photo.OpenReadAsync();
+
+
+
         var uploadsParams = new ImageUploadParams
         {
-
-            File = new FileDescription(Guid.NewGuid().ToString(), await photo.OpenReadAsync())
+            File = new FileDescription(Guid.NewGuid().ToString(), await photo.OpenReadAsync()),
+            EagerTransforms = new List<Transformation>(){
+               new EagerTransformation().Width(100).Height(100)}
         };
-
         var uploadResults = await cloudinary.UploadAsync(uploadsParams);
+
 
         var urlPhoto = uploadResults.Url;
 

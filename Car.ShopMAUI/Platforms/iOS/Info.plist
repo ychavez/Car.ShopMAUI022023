@@ -9,7 +9,10 @@
 		<integer>1</integer>
 		<integer>2</integer>
 	</array>
-	<key>UIRequiredDeviceCapabilities</key>
+  <key>NSCameraUsageDescription</key>
+  <string>The program wants to access the camera so you can use your photos and camera in this photo editor.</string>
+
+  <key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
 	</array>
